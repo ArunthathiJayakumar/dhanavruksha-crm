@@ -1,0 +1,10 @@
+Django==5.0
+djangorestframework==3.14.0
+django-cors-headers==4.3.0
+psycopg2-binary==2.9.9; sys_platform == 'linux' or sys_platform == 'darwin'  # Optional: Only for Linux/Mac
+djangorestframework-simplejwt==5.3.0
+python-dotenv==1.0.0
+django-environ==0.11.2
+gunicorn==21.2.0; sys_platform == 'linux' or sys_platform == 'darwin'  # Optional: Only for production
+whitenoise==6.6.0
+drf-yasg==1.21.7

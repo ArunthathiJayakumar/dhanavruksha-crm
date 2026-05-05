@@ -44,12 +44,9 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 
-# Backend files (exclude only actual backend folder, not frontend files)
-backend/
-api/
+# Backend files (exclude only actual backend server, keep Vercel serverless)
+# backend/
 simple-server.js
-package.json
-package-lock.json
 
 # Documentation files (keep main README)
 *.md

@@ -1,117 +1,54 @@
-// API Configuration for DHANAVRUKSHA CRM
-// Change API_BASE_URL for production deployment
-
-const API_BASE_URL = 'http://localhost:8000/api'; // API Configuration
-
-// API Endpoints
-const API_ENDPOINTS = {
-    // Authentication
-    REGISTER: `${API_BASE_URL}/auth/register/`,
-    LOGIN: `${API_BASE_URL}/auth/login/`,
-    TOKEN_REFRESH: `${API_BASE_URL}/auth/token/refresh/`,
-    CHANGE_PASSWORD: `${API_BASE_URL}/auth/change-password/`,
-    CURRENT_USER: `${API_BASE_URL}/auth/me/`,
+// API Configuration for Vercel Serverless Backend
+const API_CONFIG = {
+    // Base URL for API calls
+    BASE_URL: process.env.NODE_ENV === 'production' 
+        ? 'https://dhanavruksha-crm.vercel.app/api' 
+        : 'http://localhost:3000/api',
     
-    // Resources
-    USERS: `${API_BASE_URL}/users/`,
-    TASKS: `${API_BASE_URL}/tasks/`,
-    LEADS: `${API_BASE_URL}/leads/`,
-    CLIENTS: `${API_BASE_URL}/clients/`,
-    ATTENDANCE: `${API_BASE_URL}/attendance/`,
-    PIPELINE: `${API_BASE_URL}/pipeline/`,
-    DASHBOARD: `${API_BASE_URL}/dashboard/`,
+    // API Endpoints
+    ENDPOINTS: {
+        USERS: '/users',
+        TASKS: '/tasks',
+        CLIENTS: '/clients',
+        SALES_PIPELINE: '/sales-pipeline',
+        ATTENDANCE: '/attendance'
+    },
+    
+    // Headers for API requests
+    HEADERS: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    
+    // Get full URL for endpoint
+    getUrl: function(endpoint) {
+        return this.BASE_URL + this.ENDPOINTS[endpoint];
+    },
+    
+    // Make API request
+    request: async function(endpoint, options = {}) {
+        const url = this.getUrl(endpoint);
+        const config = {
+            headers: this.HEADERS,
+            ...options
+        };
+        
+        try {
+            const response = await fetch(url, config);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return await response.json();
+        } catch (error) {
+            console.error('API request failed:', error);
+            throw error;
+        }
+    }
 };
 
-// Helper function to get auth headers
-function getAuthHeaders() {
-    const token = localStorage.getItem('access_token');
-    return {
-        'Content-Type': 'application/json',
-        'Authorization': token ? `Bearer ${token}` : ''
-    };
-}
-
-// Helper function to make API requests
-async function apiRequest(endpoint, method = 'GET', data = null) {
-    const options = {
-        method,
-        headers: getAuthHeaders(),
-    };
-    
-    if (data) {
-        options.body = JSON.stringify(data);
-    }
-    
-    try {
-        const response = await fetch(endpoint, options);
-        
-        // Handle token expiration
-        if (response.status === 401) {
-            // Token expired, try to refresh
-            const refreshed = await refreshToken();
-            if (refreshed) {
-                // Retry request with new token
-                options.headers = getAuthHeaders();
-                return await fetch(endpoint, options);
-            } else {
-                // Refresh failed, redirect to login
-                localStorage.removeItem('access_token');
-                localStorage.removeItem('refresh_token');
-                localStorage.removeItem('currentUser');
-                window.location.href = 'index.html';
-                return null;
-            }
-        }
-        
-        return response;
-    } catch (error) {
-        console.error('API Request Error:', error);
-        throw error;
-    }
-}
-
-// Refresh access token
-async function refreshToken() {
-    const refreshToken = localStorage.getItem('refresh_token');
-    if (!refreshToken) return false;
-    
-    try {
-        const response = await fetch(API_ENDPOINTS.TOKEN_REFRESH, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ refresh: refreshToken })
-        });
-        
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('access_token', data.access);
-            if (data.refresh) {
-                localStorage.setItem('refresh_token', data.refresh);
-            }
-            return true;
-        }
-        return false;
-    } catch (error) {
-        console.error('Token refresh error:', error);
-        return false;
-    }
-}
-
-// Check if user is authenticated
-function isAuthenticated() {
-    return !!localStorage.getItem('access_token');
-}
-
-// Get current user from localStorage
-function getCurrentUser() {
-    const userStr = localStorage.getItem('currentUser');
-    return userStr ? JSON.parse(userStr) : null;
-}
-
-// Logout function
-function logout() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-    localStorage.removeItem('currentUser');
-    window.location.href = 'index.html';
+// Export for use in other files
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = API_CONFIG;
+} else {
+    window.API_CONFIG = API_CONFIG;
 }
