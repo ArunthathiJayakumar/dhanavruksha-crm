@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Information - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="client-info.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link active">Clients</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Client Information Section -->
+    <section class="client-section">
+        <div class="container">
+            <div class="client-header">
+                <div class="header-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h1 class="neon-text">Client Information Management</h1>
+                <p>Manage client details, meeting notes, and proposals</p>
+            </div>
+
+            <!-- Add Client Form -->
+            <div class="form-card">
+                <h3><i class="fas fa-user-plus"></i> Add New Client</h3>
+                <form id="clientForm" onsubmit="addClient(event)">
+                    <div class="form-group">
+                        <label for="clientName">
+                            <i class="fas fa-user"></i> Client Name *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="clientName" 
+                            placeholder="Enter client name" 
+                            required
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="meetingNotes">
+                            <i class="fas fa-sticky-note"></i> Meeting Notes *
+                        </label>
+                        <textarea 
+                            id="meetingNotes" 
+                            rows="4" 
+                            placeholder="Enter meeting notes and discussion details" 
+                            required
+                        ></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="proposalUpload">
+                            <i class="fas fa-file-upload"></i> Upload Proposal
+                        </label>
+                        <div class="file-upload-wrapper">
+                            <input 
+                                type="file" 
+                                id="proposalUpload" 
+                                accept=".pdf,.doc,.docx,.jpg,.png"
+                                onchange="previewFile()"
+                            />
+                            <div id="filePreview" class="file-preview"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-plus-circle"></i> Add Client
+                        </button>
+                        <button type="reset" class="btn-secondary" onclick="clearFilePreview()">
+                            <i class="fas fa-redo"></i> Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Client Information Table -->
+            <div class="table-card">
+                <h3><i class="fas fa-table"></i> Client Information Table</h3>
+                <div class="table-responsive">
+                    <table class="client-table">
+                        <thead>
+                            <tr>
+                                <th><i class="fas fa-hashtag"></i> ID</th>
+                                <th><i class="fas fa-user"></i> Client Name</th>
+                                <th><i class="fas fa-sticky-note"></i> Meeting Notes</th>
+                                <th><i class="fas fa-file-alt"></i> Proposal</th>
+                                <th><i class="fas fa-calendar"></i> Added Date</th>
+                                <th><i class="fas fa-cog"></i> Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="clientTableBody">
+                            <!-- Client rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card total-clients">
+                    <i class="fas fa-users"></i>
+                    <span class="count" id="totalClients">0</span>
+                    <span class="label">Total Clients</span>
+                </div>
+                <div class="summary-card with-proposals">
+                    <i class="fas fa-file-contract"></i>
+                    <span class="count" id="withProposals">0</span>
+                    <span class="label">With Proposals</span>
+                </div>
+                <div class="summary-card recent-additions">
+                    <i class="fas fa-clock"></i>
+                    <span class="count" id="recentAdditions">0</span>
+                    <span class="label">Added This Week</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="client-info.js"></script>
+</body>
+</html>

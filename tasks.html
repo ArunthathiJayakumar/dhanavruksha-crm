@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasks & Follow-Ups - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="tasks.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link admin-only">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link admin-only">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link admin-only">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link admin-only">Clients</a></li>
+                <li><a href="sales-pipeline.html" class="nav-link admin-only">Pipeline</a></li>
+                <li><a href="tasks.html" class="nav-link active">Tasks</a></li>
+                <li><a href="user-management.html" class="nav-link admin-only">Users</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+                <li><a href="#" class="nav-link" onclick="logout(); return false;"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Tasks Section -->
+    <section class="tasks-section">
+        <div class="container">
+            <div class="tasks-header">
+                <div class="header-icon">
+                    <i class="fas fa-tasks"></i>
+                </div>
+                <h1 class="neon-text">Task & Follow-Up Management</h1>
+                <p>Assign tasks, set reminders, and track completion to ensure nothing falls through the cracks</p>
+            </div>
+
+            <!-- Task Statistics -->
+            <div class="task-stats">
+                <div class="stat-card">
+                    <i class="fas fa-list-ul"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalTasks">0</span>
+                        <span class="stat-label">Total Tasks</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="completedTasks">0</span>
+                        <span class="stat-label">Completed</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="pendingTasks">0</span>
+                        <span class="stat-label">Pending</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="overdueTasks">0</span>
+                        <span class="stat-label">Overdue</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Add Task Button -->
+            <div class="add-task-bar">
+                <button class="btn-primary" onclick="openAddTaskModal()">
+                    <i class="fas fa-plus-circle"></i> Create New Task
+                </button>
+                <div class="task-filters">
+                    <select id="filterStatus" onchange="filterTasks()">
+                        <option value="all">All Tasks</option>
+                        <option value="pending">Pending</option>
+                        <option value="completed">Completed</option>
+                        <option value="overdue">Overdue</option>
+                    </select>
+                    <select id="filterPriority" onchange="filterTasks()">
+                        <option value="all">All Priorities</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Tasks List -->
+            <div class="tasks-container">
+                <h3><i class="fas fa-clipboard-list"></i> All Tasks & Follow-Ups</h3>
+                <div class="tasks-list" id="tasksList">
+                    <!-- Tasks will be inserted here -->
+                </div>
+            </div>
+
+            <!-- Upcoming Reminders -->
+            <div class="upcoming-reminders">
+                <h3><i class="fas fa-bell"></i> Upcoming Reminders</h3>
+                <div class="reminders-list" id="remindersList">
+                    <!-- Reminders will be inserted here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add/Edit Task Modal -->
+    <div id="taskModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-plus-circle"></i> Create New Task</h2>
+                <button class="close-btn" onclick="closeTaskModal()">&times;</button>
+            </div>
+            <form id="taskForm" onsubmit="saveTask(event)">
+                <input type="hidden" id="taskId">
+                
+                <div class="form-group">
+                    <label for="taskTitle">
+                        <i class="fas fa-heading"></i> Task Title *
+                    </label>
+                    <input type="text" id="taskTitle" required placeholder="Enter task title">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskType">
+                        <i class="fas fa-tag"></i> Task Type *
+                    </label>
+                    <select id="taskType" required>
+                        <option value="">Select Type</option>
+                        <option value="call">Call</option>
+                        <option value="meeting">Meeting</option>
+                        <option value="email">Email</option>
+                        <option value="followup">Follow-up</option>
+                        <option value="proposal">Proposal</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskPriority">
+                            <i class="fas fa-flag"></i> Priority *
+                        </label>
+                        <select id="taskPriority" required onchange="updatePriorityColor()">
+                            <option value="">Select Priority</option>
+                            <option value="high">High</option>
+                            <option value="medium">Medium</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskAssignedTo">
+                            <i class="fas fa-user-tie"></i> Assigned To
+                        </label>
+                        <select id="taskAssignedTo">
+                            <option value="">Select User</option>
+                            <!-- Will be populated from user management -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="taskDueDate">
+                            <i class="fas fa-calendar-alt"></i> Due Date *
+                        </label>
+                        <input type="date" id="taskDueDate" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="taskDueTime">
+                            <i class="fas fa-clock"></i> Due Time
+                        </label>
+                        <input type="time" id="taskDueTime">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="taskRelatedTo">
+                        <i class="fas fa-link"></i> Related To (Client/Deal)
+                    </label>
+                    <input type="text" id="taskRelatedTo" placeholder="Link to client or deal">
+                </div>
+
+                <div class="form-group">
+                    <label for="taskDescription">
+                        <i class="fas fa-sticky-note"></i> Description
+                    </label>
+                    <textarea id="taskDescription" rows="4" placeholder="Task details and notes"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="taskReminder">
+                        <i class="fas fa-bell"></i> Enable Reminder Notification
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Task
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="closeTaskModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="tasks.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Pipeline - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="sales-pipeline.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link">Clients</a></li>
+                <li><a href="sales-pipeline.html" class="nav-link active">Pipeline</a></li>
+                <li><a href="tasks.html" class="nav-link">Tasks</a></li>
+                <li><a href="user-management.html" class="nav-link">Users</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sales Pipeline Section -->
+    <section class="pipeline-section">
+        <div class="container">
+            <div class="pipeline-header">
+                <div class="header-icon">
+                    <i class="fas fa-funnel-dollar"></i>
+                </div>
+                <h1 class="neon-text">Sales Pipeline Management</h1>
+                <p>Visual pipeline to track deals through stages and monitor expected revenue</p>
+            </div>
+
+            <!-- Pipeline Statistics -->
+            <div class="pipeline-stats">
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalDeals">0</span>
+                        <span class="stat-label">Total Deals</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-rupee-sign"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalValue">₹0</span>
+                        <span class="stat-label">Total Pipeline Value</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-wallet"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="expectedRevenue">₹0</span>
+                        <span class="stat-label">Expected Revenue</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-percentage"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="avgDealSize">₹0</span>
+                        <span class="stat-label">Avg Deal Size</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Visual Pipeline Board -->
+            <div class="pipeline-board-container">
+                <h3><i class="fas fa-columns"></i> Deal Pipeline</h3>
+                <button class="btn-primary" onclick="openAddDealModal()">
+                    <i class="fas fa-plus-circle"></i> Add New Deal
+                </button>
+            </div>
+
+            <div class="pipeline-board" id="pipelineBoard">
+                <!-- Stage: Lead -->
+                <div class="pipeline-stage" data-stage="lead">
+                    <div class="stage-header lead-header">
+                        <h4><i class="fas fa-seedling"></i> Lead</h4>
+                        <span class="stage-count" id="leadCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="leadStage"></div>
+                </div>
+
+                <!-- Stage: Contacted -->
+                <div class="pipeline-stage" data-stage="contacted">
+                    <div class="stage-header contacted-header">
+                        <h4><i class="fas fa-phone-alt"></i> Contacted</h4>
+                        <span class="stage-count" id="contactedCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="contactedStage"></div>
+                </div>
+
+                <!-- Stage: Proposal -->
+                <div class="pipeline-stage" data-stage="proposal">
+                    <div class="stage-header proposal-header">
+                        <h4><i class="fas fa-file-contract"></i> Proposal</h4>
+                        <span class="stage-count" id="proposalCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="proposalStage"></div>
+                </div>
+
+                <!-- Stage: Negotiation -->
+                <div class="pipeline-stage" data-stage="negotiation">
+                    <div class="stage-header negotiation-header">
+                        <h4><i class="fas fa-handshake"></i> Negotiation</h4>
+                        <span class="stage-count" id="negotiationCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="negotiationStage"></div>
+                </div>
+
+                <!-- Stage: Closed Won -->
+                <div class="pipeline-stage" data-stage="won">
+                    <div class="stage-header won-header">
+                        <h4><i class="fas fa-check-circle"></i> Closed Won</h4>
+                        <span class="stage-count" id="wonCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="wonStage"></div>
+                </div>
+
+                <!-- Stage: Closed Lost -->
+                <div class="pipeline-stage" data-stage="lost">
+                    <div class="stage-header lost-header">
+                        <h4><i class="fas fa-times-circle"></i> Closed Lost</h4>
+                        <span class="stage-count" id="lostCount">0</span>
+                    </div>
+                    <div class="stage-deals" id="lostStage"></div>
+                </div>
+            </div>
+
+            <!-- Deals Table -->
+            <div class="deals-table-container">
+                <h3><i class="fas fa-table"></i> All Deals</h3>
+                <div class="table-responsive">
+                    <table class="deals-table">
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Stage</th>
+                                <th>Value (₹)</th>
+                                <th>Probability</th>
+                                <th>Expected Revenue</th>
+                                <th>Created Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dealsTableBody">
+                            <!-- Deals will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add/Edit Deal Modal -->
+    <div id="dealModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-plus-circle"></i> Add New Deal</h2>
+                <button class="close-btn" onclick="closeDealModal()">&times;</button>
+            </div>
+            <form id="dealForm" onsubmit="saveDeal(event)">
+                <input type="hidden" id="dealId">
+                
+                <div class="form-group">
+                    <label for="clientName">
+                        <i class="fas fa-user"></i> Client Name *
+                    </label>
+                    <input type="text" id="clientName" required placeholder="Enter client name">
+                </div>
+
+                <div class="form-group">
+                    <label for="dealValue">
+                        <i class="fas fa-rupee-sign"></i> Value (₹) - SIP + Lumpsum *
+                    </label>
+                    <input type="number" id="dealValue" required min="0" step="0.01" placeholder="0.00">
+                </div>
+
+                <div class="form-group">
+                    <label for="dealStage">
+                        <i class="fas fa-funnel-dollar"></i> Stage *
+                    </label>
+                    <select id="dealStage" required onchange="updateProbability()">
+                        <option value="">Select Stage</option>
+                        <option value="lead">Lead</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="proposal">Proposal</option>
+                        <option value="negotiation">Negotiation</option>
+                        <option value="won">Closed Won</option>
+                        <option value="lost">Closed Lost</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="probability">
+                        <i class="fas fa-percentage"></i> Probability (%)
+                    </label>
+                    <input type="number" id="probability" min="0" max="100" readonly placeholder="Auto-calculated">
+                </div>
+
+                <div class="form-group">
+                    <label for="expectedRevenue">
+                        <i class="fas fa-wallet"></i> Expected Revenue
+                    </label>
+                    <input type="text" id="expectedRevenue" readonly placeholder="Auto-calculated">
+                </div>
+
+                <div class="form-group">
+                    <label for="description">
+                        <i class="fas fa-sticky-note"></i> Description
+                    </label>
+                    <textarea id="description" rows="3" placeholder="Additional details about the deal"></textarea>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save Deal
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="closeDealModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="sales-pipeline.js"></script>
+</body>
+</html>

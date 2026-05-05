@@ -1,0 +1,498 @@
+/* Client Information Page Styles */
+
+.client-section {
+    min-height: 100vh;
+    padding: 120px 0 4rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #dee2e6 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+/* Header */
+.client-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-white);
+    border-radius: 20px;
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--shadow-xl), var(--shadow-blue);
+}
+
+.header-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow-blue);
+}
+
+.header-icon i {
+    font-size: 2.5rem;
+    color: var(--bg-white);
+}
+
+.client-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.client-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* Form Card */
+.form-card {
+    background: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.form-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.form-card h3 i {
+    width: 35px;
+    height: 35px;
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text-dark);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group label i {
+    color: var(--primary-color);
+    width: 20px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    background: var(--bg-white);
+    box-shadow: 0 0 0 3px rgba(200, 162, 74, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+    font-family: inherit;
+}
+
+/* File Upload */
+.file-upload-wrapper {
+    margin-top: 0.5rem;
+}
+
+.file-upload-wrapper input[type="file"] {
+    display: none;
+}
+
+.file-upload-label {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-light);
+    border: 2px dashed var(--primary-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.file-upload-label:hover {
+    background: rgba(200, 162, 74, 0.1);
+    border-color: var(--primary-dark);
+}
+
+.file-preview {
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    background: var(--bg-light);
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+    display: none;
+}
+
+.file-preview.show {
+    display: block;
+}
+
+.file-preview i {
+    color: var(--primary-color);
+    margin-right: 0.5rem;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.form-actions button {
+    flex: 1;
+    max-width: 200px;
+    padding: 0.875rem 1.5rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+/* Table Card */
+.table-card {
+    background: var(--bg-white);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-md);
+}
+
+.table-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.3rem;
+}
+
+.table-card h3 i {
+    width: 35px;
+    height: 35px;
+    background: var(--primary-color);
+    color: var(--bg-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Table Responsive Wrapper */
+.table-responsive {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-sm);
+}
+
+/* Client Table */
+.client-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-white);
+    min-width: 1000px;
+}
+
+.client-table thead {
+    background: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.client-table th {
+    padding: 1rem;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    color: var(--bg-white);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.client-table th i {
+    margin-right: 0.5rem;
+}
+
+.client-table td {
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    color: var(--text-dark);
+    vertical-align: top;
+}
+
+.client-table tbody tr {
+    transition: all 0.3s ease;
+}
+
+.client-table tbody tr:hover {
+    background: rgba(200, 162, 74, 0.05);
+}
+
+.client-table .client-id {
+    font-weight: 700;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.client-table .client-name {
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.client-table .meeting-notes {
+    max-width: 300px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.client-table .proposal-cell {
+    text-align: center;
+}
+
+.client-table .proposal-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(200, 162, 74, 0.1);
+    color: var(--primary-color);
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.client-table .proposal-link:hover {
+    background: var(--primary-color);
+    color: var(--bg-white);
+}
+
+.client-table .no-proposal {
+    color: var(--text-muted);
+    font-style: italic;
+}
+
+.client-table .added-date {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.client-table .actions {
+    text-align: center;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0.5rem 0;
+}
+
+.client-table td {
+    vertical-align: middle;
+    padding: 1rem;
+}
+
+.client-table th {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    font-weight: 700;
+    text-align: left;
+    padding: 1rem;
+    border: none;
+}
+
+.client-table tbody tr:hover {
+    background: var(--bg-light);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-action {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    color: var(--bg-white);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin: 0 0.25rem;
+    min-width: 80px;
+    white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+    .btn-action {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        min-width: 70px;
+        margin: 0.1rem;
+    }
+    
+    .client-table .actions {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.25rem;
+    }
+}
+
+.btn-edit {
+    background: #17a2b8;
+}
+
+.btn-edit:hover {
+    background: #138496;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(23, 162, 184, 0.3);
+}
+
+.btn-delete {
+    background: #dc3545;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(220, 53, 69, 0.3);
+}
+
+.btn-view {
+    background: var(--primary-color);
+}
+
+.btn-view:hover {
+    background: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(124, 58, 237, 0.3);
+}
+
+/* Summary Cards */
+.summary-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.summary-card {
+    background: var(--bg-medium);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.summary-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.summary-card i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.summary-card.total-clients i {
+    color: var(--primary-color);
+}
+
+.summary-card.with-proposals i {
+    color: #28a745;
+}
+
+.summary-card.recent-additions i {
+    color: #17a2b8;
+}
+
+.summary-card .count {
+    display: block;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.25rem;
+}
+
+.summary-card .label {
+    display: block;
+    color: var(--text-light);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        max-width: 100%;
+    }
+    
+    .summary-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .client-table {
+        min-width: 800px;
+        font-size: 0.85rem;
+    }
+    
+    .client-table .meeting-notes {
+        max-width: 200px;
+        font-size: 0.85rem;
+    }
+}

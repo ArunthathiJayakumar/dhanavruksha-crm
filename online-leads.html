@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Leads - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="leads-form.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo"></div>
+    </div>
+
+    <!-- Mouse Trail Elements -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link active">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link">Clients</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Lead Form Section -->
+    <section class="lead-form-section">
+        <div class="morphing-blob blob-1"></div>
+        <div class="morphing-blob blob-2"></div>
+        <div class="aurora-bg"></div>
+
+        <div class="container">
+            <div class="lead-form-container">
+                <div class="form-header">
+                    <div class="form-icon">
+                        <i class="fas fa-user-plus"></i>
+                    </div>
+                    <h1 class="neon-text">Online Lead Capture</h1>
+                    <p>Fill in the details below to capture a new lead. Our team will reach out within 24 hours.</p>
+                </div>
+
+                <form id="leadForm" class="lead-form">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-user"></i> Personal Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="Enter first name">
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Enter last name">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="age">Age</label>
+                                <input type="number" id="age" name="age" min="18" max="100" placeholder="Enter age">
+                            </div>
+                            <div class="form-group">
+                                <label for="gender">Gender</label>
+                                <select id="gender" name="gender">
+                                    <option value="">Select gender</option>
+                                    <option value="male">Male</option>
+                                    <option value="female">Female</option>
+                                    <option value="other">Other</option>
+                                    <option value="prefer-not-to-say">Prefer not to say</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-address-card"></i> Contact Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="phone">Contact Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="Enter phone number">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email ID <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="Enter email address">
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="address">Address</label>
+                            <textarea id="address" name="address" rows="2" placeholder="Enter complete address"></textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="city">City</label>
+                                <input type="text" id="city" name="city" placeholder="Enter city">
+                            </div>
+                            <div class="form-group">
+                                <label for="state">State</label>
+                                <input type="text" id="state" name="state" placeholder="Enter state">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Information -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-chart-pie"></i> Financial Information</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="portfolioValue">Portfolio Value (in INR)</label>
+                                <select id="portfolioValue" name="portfolioValue">
+                                    <option value="">Select portfolio range</option>
+                                    <option value="below-1l">Below ₹1 Lakh</option>
+                                    <option value="1l-5l">₹1 Lakh - ₹5 Lakhs</option>
+                                    <option value="5l-10l">₹5 Lakhs - ₹10 Lakhs</option>
+                                    <option value="10l-25l">₹10 Lakhs - ₹25 Lakhs</option>
+                                    <option value="25l-50l">₹25 Lakhs - ₹50 Lakhs</option>
+                                    <option value="50l-1cr">₹50 Lakhs - ₹1 Crore</option>
+                                    <option value="above-1cr">Above ₹1 Crore</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="annualIncome">Annual Income (in INR)</label>
+                                <select id="annualIncome" name="annualIncome">
+                                    <option value="">Select income range</option>
+                                    <option value="below-3l">Below ₹3 Lakhs</option>
+                                    <option value="3l-5l">₹3 Lakhs - ₹5 Lakhs</option>
+                                    <option value="5l-10l">₹5 Lakhs - ₹10 Lakhs</option>
+                                    <option value="10l-20l">₹10 Lakhs - ₹20 Lakhs</option>
+                                    <option value="20l-50l">₹20 Lakhs - ₹50 Lakhs</option>
+                                    <option value="above-50l">Above ₹50 Lakhs</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Investment Interests</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="stocks">
+                                    <span>Stocks</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="mutual-funds">
+                                    <span>Mutual Funds</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="fixed-deposits">
+                                    <span>Fixed Deposits</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="insurance">
+                                    <span>Insurance</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="real-estate">
+                                    <span>Real Estate</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="gold">
+                                    <span>Gold</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="crypto">
+                                    <span>Cryptocurrency</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="investmentInterest" value="other">
+                                    <span>Other</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Inquiry Details -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-question-circle"></i> Inquiry Details</h3>
+                        <div class="form-group full-width">
+                            <label for="inquirySource">How did they contact us? <span class="required">*</span></label>
+                            <select id="inquirySource" name="inquirySource" required>
+                                <option value="">Select source</option>
+                                <option value="phone-call">Phone Call</option>
+                                <option value="email">Email</option>
+                                <option value="website">Website</option>
+                                <option value="social-media">Social Media</option>
+                                <option value="referral">Referral</option>
+                                <option value="walk-in">Walk-in</option>
+                                <option value="advertisement">Advertisement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="reasonForCall">Why did they call? <span class="required">*</span></label>
+                            <textarea id="reasonForCall" name="reasonForCall" rows="3" required placeholder="Describe the reason for their inquiry..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="servicesInterested">Services Interested In</label>
+                            <div class="checkbox-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="wealth-management">
+                                    <span>Wealth Management</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="tax-planning">
+                                    <span>Tax Planning</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="retirement-planning">
+                                    <span>Retirement Planning</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="portfolio-management">
+                                    <span>Portfolio Management</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="financial-advisory">
+                                    <span>Financial Advisory</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="loan-services">
+                                    <span>Loan Services</span>
+                                </label>
+                                <label class="checkbox-label">
+                                    <input type="checkbox" name="servicesInterested" value="insurance-services">
+                                    <span>Insurance Services</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Notes -->
+                    <div class="form-section">
+                        <h3><i class="fas fa-sticky-note"></i> Additional Information</h3>
+                        <div class="form-group full-width">
+                            <label for="additionalNotes">Additional Notes / Remarks</label>
+                            <textarea id="additionalNotes" name="additionalNotes" rows="3" placeholder="Any other relevant information..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="followUpDate">Preferred Follow-up Date</label>
+                            <input type="date" id="followUpDate" name="followUpDate">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="priority">Priority Level</label>
+                            <div class="radio-group">
+                                <label class="radio-label">
+                                    <input type="radio" name="priority" value="low">
+                                    <span>Low</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="priority" value="medium" checked>
+                                    <span>Medium</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="priority" value="high">
+                                    <span>High</span>
+                                </label>
+                                <label class="radio-label">
+                                    <input type="radio" name="priority" value="urgent">
+                                    <span>Urgent</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary magnetic-btn" onclick="window.location.href='index.html'">
+                            <i class="fas fa-arrow-left"></i> Back to Home
+                        </button>
+                        <button type="reset" class="btn-secondary magnetic-btn">
+                            <i class="fas fa-undo"></i> Reset Form
+                        </button>
+                        <button type="submit" class="btn-primary magnetic-btn btn-3d">
+                            <i class="fas fa-save"></i> Submit Lead
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h2>Lead Captured Successfully!</h2>
+            <p>The lead information has been saved and email notifications have been sent to the team.</p>
+            <div class="modal-details" id="modalDetails"></div>
+            <button class="btn-primary magnetic-btn" onclick="closeModal()">
+                <i class="fas fa-thumbs-up"></i> Great!
+            </button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="leads-form.js"></script>
+</body>
+</html>

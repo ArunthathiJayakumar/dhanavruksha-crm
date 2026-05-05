@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Debug</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        h2 {
+            color: #C8A24A;
+            margin-top: 0;
+        }
+        button {
+            padding: 10px 20px;
+            background: #C8A24A;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background: #b8923a;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            border: 1px solid #dee2e6;
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Login Diagnostic Tool</h1>
+    
+    <div class="card">
+        <h2>1. Check Backend Server</h2>
+        <button onclick="checkBackend()">Test Backend Connection</button>
+        <div id="backendStatus"></div>
+    </div>
+
+    <div class="card">
+        <h2>2. Check LocalStorage Users</h2>
+        <button onclick="checkLocalStorage()">View Stored Users</button>
+        <div id="localStorageStatus"></div>
+    </div>
+
+    <div class="card">
+        <h2>3. Test API Login</h2>
+        <button onclick="testApiLogin()">Test Admin Login via API</button>
+        <div id="apiLoginStatus"></div>
+    </div>
+
+    <div class="card">
+        <h2>4. Test LocalStorage Login</h2>
+        <button onclick="testLocalStorageLogin()">Test Admin Login via LocalStorage</button>
+        <div id="localStorageLoginStatus"></div>
+    </div>
+
+    <script>
+        // Check if backend is running
+        async function checkBackend() {
+            const statusDiv = document.getElementById('backendStatus');
+            statusDiv.innerHTML = '<div class="status info">Testing backend connection...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/auth/login/', {
+                    method: 'OPTIONS'
+                });
+                
+                statusDiv.innerHTML = `
+                    <div class="status success">
+                        ✅ Backend is running!<br>
+                        <strong>Status:</strong> ${response.status}<br>
+                        <strong>URL:</strong> http://localhost:8000
+                    </div>
+                `;
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ Backend is NOT running!<br>
+                        <strong>Error:</strong> ${error.message}<br>
+                        <strong>Solution:</strong> Run <code>python manage.py runserver</code> in the backend directory
+                    </div>
+                `;
+            }
+        }
+
+        // Check localStorage users
+        function checkLocalStorage() {
+            const statusDiv = document.getElementById('localStorageStatus');
+            const stored = localStorage.getItem('crmUsers');
+            
+            if (!stored) {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ No users found in localStorage!<br>
+                        <strong>Solution:</strong> The default admin user should be created automatically on page load
+                    </div>
+                `;
+                return;
+            }
+            
+            const users = JSON.parse(stored);
+            statusDiv.innerHTML = `
+                <div class="status success">
+                    ✅ Found ${users.length} user(s) in localStorage<br>
+                    <pre>${JSON.stringify(users, null, 2)}</pre>
+                </div>
+            `;
+        }
+
+        // Test API login
+        async function testApiLogin() {
+            const statusDiv = document.getElementById('apiLoginStatus');
+            statusDiv.innerHTML = '<div class="status info">Testing API login...</div>';
+            
+            try {
+                const response = await fetch('http://localhost:8000/api/auth/login/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: 'admin@dhanavruksha.com',
+                        password: 'admin123',
+                        role: 'admin'
+                    })
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    statusDiv.innerHTML = `
+                        <div class="status success">
+                            ✅ API Login Successful!<br>
+                            <strong>Status:</strong> ${response.status}<br>
+                            <strong>Response:</strong>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                } else {
+                    statusDiv.innerHTML = `
+                        <div class="status error">
+                            ❌ API Login Failed!<br>
+                            <strong>Status:</strong> ${response.status}<br>
+                            <strong>Error:</strong>
+                            <pre>${JSON.stringify(data, null, 2)}</pre>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ Request Error!<br>
+                        <strong>Error:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+
+        // Test localStorage login
+        function testLocalStorageLogin() {
+            const statusDiv = document.getElementById('localStorageLoginStatus');
+            
+            const stored = localStorage.getItem('crmUsers');
+            if (!stored) {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ No users in localStorage!
+                    </div>
+                `;
+                return;
+            }
+            
+            const users = JSON.parse(stored);
+            const user = users.find(u => u.email === 'admin@dhanavruksha.com' && u.password === 'admin123');
+            
+            if (user) {
+                statusDiv.innerHTML = `
+                    <div class="status success">
+                        ✅ LocalStorage Login Works!<br>
+                        <strong>Found user:</strong>
+                        <pre>${JSON.stringify(user, null, 2)}</pre>
+                    </div>
+                `;
+            } else {
+                statusDiv.innerHTML = `
+                    <div class="status error">
+                        ❌ Admin user not found in localStorage!<br>
+                        <strong>Looking for:</strong> email=admin@dhanavruksha.com, password=admin123
+                    </div>
+                `;
+            }
+        }
+
+        // Auto-run checks on load
+        window.addEventListener('DOMContentLoaded', () => {
+            checkBackend();
+            checkLocalStorage();
+        });
+    </script>
+</body>
+</html>

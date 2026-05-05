@@ -1,0 +1,506 @@
+/* Clickable Feature Card Styles */
+.feature-card-link {
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.feature-card-link:hover {
+    transform: translateY(-8px);
+}
+
+.clickable-card {
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.clickable-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.clickable-card:hover::after {
+    left: 100%;
+}
+
+.card-action {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.card-action span {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.clickable-card:hover .card-action span {
+    gap: 0.75rem;
+}
+
+.card-action i {
+    transition: transform 0.3s ease;
+}
+
+.clickable-card:hover .card-action i {
+    transform: translateX(5px);
+}
+
+/* Lead Form Page Styles */
+
+.lead-form-section {
+    min-height: 100vh;
+    padding: 120px 0 4rem;
+    background: linear-gradient(135deg, #000000 0%, #1A1A1A 50%, #2D2D2D 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.lead-form-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%);
+    animation: pulse 4s ease-in-out infinite;
+}
+
+.lead-form-container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* Form Header */
+.form-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--bg-light);
+    border-radius: 20px;
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--shadow-xl), var(--shadow-yellow);
+}
+
+.form-icon {
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: var(--shadow-yellow);
+    animation: iconFloat 3s ease-in-out infinite;
+}
+
+.form-icon i {
+    font-size: 3rem;
+    color: var(--bg-dark);
+}
+
+.form-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-weight: 800;
+}
+
+.form-header p {
+    color: #CCCCCC;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Lead Form */
+.lead-form {
+    background: var(--bg-light);
+    border-radius: 20px;
+    padding: 2.5rem;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--shadow-xl);
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2rem;
+}
+
+.form-section h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 700;
+}
+
+.form-section h3 i {
+    width: 35px;
+    height: 35px;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+/* Form Layout */
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    color: var(--bg-white);
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.form-group .required {
+    color: #ff4444;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    padding: 1rem 1.25rem;
+    background: var(--bg-medium);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--bg-white);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #666;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23D4AF37' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.form-group select option {
+    background: var(--bg-medium);
+    color: var(--bg-white);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Checkbox & Radio Groups */
+.checkbox-group,
+.radio-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1rem;
+    background: var(--bg-medium);
+    border-radius: 12px;
+    border: 2px solid var(--border-color);
+}
+
+.checkbox-label,
+.radio-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    background: var(--bg-light);
+    border-radius: 25px;
+    border: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+    color: var(--bg-white);
+    font-size: 0.9rem;
+}
+
+.checkbox-label:hover,
+.radio-label:hover {
+    border-color: var(--primary-color);
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.checkbox-label input,
+.radio-label input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--primary-color);
+    cursor: pointer;
+}
+
+.checkbox-label input:checked + span,
+.radio-label input:checked + span {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+.checkbox-label:has(input:checked),
+.radio-label:has(input:checked) {
+    border-color: var(--primary-color);
+    background: rgba(255, 215, 0, 0.15);
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    padding-top: 1rem;
+}
+
+.form-actions button {
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-actions .btn-primary {
+    background: linear-gradient(45deg, var(--primary-color), var(--primary-dark));
+    box-shadow: var(--shadow-yellow);
+}
+
+.form-actions .btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-content {
+    background: var(--bg-light);
+    padding: 3rem;
+    border-radius: 20px;
+    text-align: center;
+    max-width: 450px;
+    width: 90%;
+    margin: 5% auto;
+    border: 2px solid var(--primary-color);
+    box-shadow: var(--shadow-xl), var(--shadow-yellow);
+    animation: bounceIn 0.5s ease;
+}
+
+.modal-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #00C851, #007E33);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    box-shadow: 0 0 20px rgba(0, 200, 81, 0.5);
+}
+
+.modal-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.modal-content h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    color: #CCCCCC;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.3);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    70% {
+        transform: scale(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes iconFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Form Validation Styles */
+.form-group input:invalid:not(:placeholder-shown),
+.form-group select:invalid:not(:placeholder-shown),
+.form-group textarea:invalid:not(:placeholder-shown) {
+    border-color: #ff4444;
+}
+
+.form-group input:valid:not(:placeholder-shown),
+.form-group select:valid:not(:placeholder-shown),
+.form-group textarea:valid:not(:placeholder-shown) {
+    border-color: #00C851;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .lead-form-section {
+        padding: 100px 0 2rem;
+    }
+
+    .form-header {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .form-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .form-icon {
+        width: 70px;
+        height: 70px;
+    }
+
+    .form-icon i {
+        font-size: 2rem;
+    }
+
+    .lead-form {
+        padding: 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .checkbox-group,
+    .radio-group {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .checkbox-label,
+    .radio-label {
+        width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+
+    .form-actions button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .modal-content {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-section h3 {
+        font-size: 1.1rem;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.875rem 1rem;
+    }
+}

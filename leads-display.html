@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Leads - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="leads-display.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo"></div>
+    </div>
+
+    <!-- Mouse Trail Elements -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link active">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link">Clients</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Leads Display Section -->
+    <section class="leads-display-section">
+        <div class="morphing-blob blob-1"></div>
+        <div class="morphing-blob blob-2"></div>
+        <div class="aurora-bg"></div>
+
+        <div class="container">
+            <div class="leads-header">
+                <div class="header-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h1 class="neon-text">Submitted Leads</h1>
+                <p>View and manage all captured leads</p>
+                <div class="leads-stats">
+                    <div class="stat-box">
+                        <span class="stat-number" id="totalLeads">0</span>
+                        <span class="stat-label">Total Leads</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="todayLeads">0</span>
+                        <span class="stat-label">Today</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number" id="highPriority">0</span>
+                        <span class="stat-label">High Priority</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Search and Filter -->
+            <div class="leads-controls">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search leads by name, email, or phone...">
+                </div>
+                <div class="filter-box">
+                    <select id="priorityFilter">
+                        <option value="">All Priorities</option>
+                        <option value="urgent">Urgent</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <button class="btn-secondary magnetic-btn" onclick="exportLeads()">
+                    <i class="fas fa-download"></i> Export CSV
+                </button>
+                <button class="btn-primary magnetic-btn" onclick="window.location.href='online-leads.html'">
+                    <i class="fas fa-plus"></i> Add New Lead
+                </button>
+            </div>
+
+            <!-- Leads List -->
+            <div class="leads-container" id="leadsContainer">
+                <!-- Leads will be loaded here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <div class="empty-icon">
+                    <i class="fas fa-inbox"></i>
+                </div>
+                <h3>No Leads Found</h3>
+                <p>Start by adding your first lead</p>
+                <button class="btn-primary magnetic-btn" onclick="window.location.href='online-leads.html'">
+                    <i class="fas fa-plus"></i> Add Lead
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Detail Modal -->
+    <div id="leadModal" class="modal">
+        <div class="modal-content lead-detail-modal">
+            <div class="modal-header">
+                <h2>Lead Details</h2>
+                <button class="close-btn" onclick="closeLeadModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="leadModalBody">
+                <!-- Lead details will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary magnetic-btn" onclick="closeLeadModal()">
+                    <i class="fas fa-times"></i> Close
+                </button>
+                <button class="btn-danger magnetic-btn" onclick="deleteCurrentLead()">
+                    <i class="fas fa-trash"></i> Delete Lead
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="leads-display.js"></script>
+</body>
+</html>

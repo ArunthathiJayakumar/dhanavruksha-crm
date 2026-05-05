@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weekly MIS - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="weekly-mis.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link">Clients</a></li>
+                <li><a href="sales-pipeline.html" class="nav-link">Pipeline</a></li>
+                <li><a href="weekly-mis.html" class="nav-link active">Weekly MIS</a></li>
+                <li><a href="tasks.html" class="nav-link">Tasks</a></li>
+                <li><a href="user-management.html" class="nav-link">Users</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Weekly MIS Section -->
+    <section class="mis-section">
+        <div class="container">
+            <div class="mis-header">
+                <div class="header-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h1 class="neon-text">Weekly Management Information System</h1>
+                <p>Track weekly performance metrics and business activities</p>
+            </div>
+
+            <!-- MIS Statistics -->
+            <div class="mis-stats">
+                <div class="stat-card">
+                    <i class="fas fa-calendar-week"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="weeklyReports">0</span>
+                        <span class="stat-label">Weekly Reports</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-handshake"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalMeetings">0</span>
+                        <span class="stat-label">Total Meetings</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-phone"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalCalls">0</span>
+                        <span class="stat-label">Total Calls</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-user-plus"></i>
+                    <div class="stat-content">
+                        <span class="stat-value" id="totalLeads">0</span>
+                        <span class="stat-label">New Leads</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIS Actions -->
+            <div class="mis-actions">
+                <button class="btn-primary" onclick="openMISModal()">
+                    <i class="fas fa-plus-circle"></i> Add Weekly MIS
+                </button>
+                <button class="btn-secondary" onclick="exportMISData()">
+                    <i class="fas fa-download"></i> Export Data
+                </button>
+                <button class="btn-info" onclick="generateReport()">
+                    <i class="fas fa-file-alt"></i> Generate Report
+                </button>
+            </div>
+
+            <!-- MIS Records Table -->
+            <div class="mis-table-container">
+                <h3><i class="fas fa-table"></i> Weekly MIS Records</h3>
+                <div class="table-responsive">
+                    <table class="mis-table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Physical Meetings</th>
+                                <th>Virtual Meetings</th>
+                                <th>Phone Calls</th>
+                                <th>New Leads</th>
+                                <th>References</th>
+                                <th>SIP (FTW/MTD)</th>
+                                <th>MF Lumpsum (FTW/MTD)</th>
+                                <th>Health Ins (FTW/MTD)</th>
+                                <th>Term Ins (FTW/MTD)</th>
+                                <th>FD (FTW/MTD)</th>
+                                <th>ARN Transfer (FTW/MTD)</th>
+                                <th>Others (FTW/MTD)</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="misTableBody">
+                            <!-- MIS records will be inserted here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add/Edit MIS Modal -->
+    <div id="misModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"><i class="fas fa-plus-circle"></i> Add Weekly MIS</h2>
+                <button class="close-btn" onclick="closeMISModal()">&times;</button>
+            </div>
+            <form id="misForm" onsubmit="saveMIS(event)">
+                <input type="hidden" id="misId">
+                
+                <div class="form-section">
+                    <h3><i class="fas fa-calendar"></i> Date & Meetings</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="misDate">
+                                <i class="fas fa-calendar-alt"></i> Date *
+                            </label>
+                            <input type="date" id="misDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="physicalMeetings">
+                                <i class="fas fa-users"></i> No. of Physical Meetings *
+                            </label>
+                            <input type="number" id="physicalMeetings" required min="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="virtualMeetings">
+                                <i class="fas fa-video"></i> No. of Virtual Meetings *
+                            </label>
+                            <input type="number" id="virtualMeetings" required min="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneCalls">
+                                <i class="fas fa-phone"></i> No. of Phone Calls *
+                            </label>
+                            <input type="number" id="phoneCalls" required min="0" placeholder="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-user-plus"></i> Leads & References</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="newLeads">
+                                <i class="fas fa-user-plus"></i> New Leads Created (Onboarded) *
+                            </label>
+                            <input type="number" id="newLeads" required min="0" placeholder="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="references">
+                                <i class="fas fa-share-alt"></i> References from Existing Clients *
+                            </label>
+                            <input type="number" id="references" required min="0" placeholder="0">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3><i class="fas fa-chart-line"></i> Business Metrics</h3>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="sipFTW">
+                                <i class="fas fa-chart-line"></i> SIP Initiated - FTW *
+                            </label>
+                            <input type="number" id="sipFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="sipMTD">
+                                <i class="fas fa-calendar-alt"></i> SIP Initiated - MTD *
+                            </label>
+                            <input type="number" id="sipMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="mfLumpsumFTW">
+                                <i class="fas fa-coins"></i> MF Lumpsum (in lacs) - FTW *
+                            </label>
+                            <input type="number" id="mfLumpsumFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="mfLumpsumMTD">
+                                <i class="fas fa-calendar-alt"></i> MF Lumpsum (in lacs) - MTD *
+                            </label>
+                            <input type="number" id="mfLumpsumMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="healthInsFTW">
+                                <i class="fas fa-heartbeat"></i> Health Insurance Premium (in k) - FTW *
+                            </label>
+                            <input type="number" id="healthInsFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="healthInsMTD">
+                                <i class="fas fa-calendar-alt"></i> Health Insurance Premium (in k) - MTD *
+                            </label>
+                            <input type="number" id="healthInsMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="termInsFTW">
+                                <i class="fas fa-shield-alt"></i> Term Insurance Premium (in k) - FTW *
+                            </label>
+                            <input type="number" id="termInsFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="termInsMTD">
+                                <i class="fas fa-calendar-alt"></i> Term Insurance Premium (in k) - MTD *
+                            </label>
+                            <input type="number" id="termInsMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fdFTW">
+                                <i class="fas fa-piggy-bank"></i> FD (in lacs) - FTW *
+                            </label>
+                            <input type="number" id="fdFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="fdMTD">
+                                <i class="fas fa-calendar-alt"></i> FD (in lacs) - MTD *
+                            </label>
+                            <input type="number" id="fdMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="arnTransferFTW">
+                                <i class="fas fa-exchange-alt"></i> ARN Transfer (in lacs) - FTW *
+                            </label>
+                            <input type="number" id="arnTransferFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="arnTransferMTD">
+                                <i class="fas fa-calendar-alt"></i> ARN Transfer (in lacs) - MTD *
+                            </label>
+                            <input type="number" id="arnTransferMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="othersFTW">
+                                <i class="fas fa-ellipsis-h"></i> Others - FTW *
+                            </label>
+                            <input type="number" id="othersFTW" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="othersMTD">
+                                <i class="fas fa-calendar-alt"></i> Others - MTD *
+                            </label>
+                            <input type="number" id="othersMTD" required min="0" step="0.01" placeholder="0.00">
+                        </div>
+                        <div class="form-group">
+                            <label for="othersDescription">
+                                <i class="fas fa-comment"></i> Others Description
+                            </label>
+                            <input type="text" id="othersDescription" placeholder="Specify others">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">
+                        <i class="fas fa-save"></i> Save MIS
+                    </button>
+                    <button type="button" class="btn-secondary" onclick="closeMISModal()">
+                        <i class="fas fa-times"></i> Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="weekly-mis.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

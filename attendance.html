@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Attendance - DHANAVRUKSHA CRM PORTAL</title>
+    <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="attendance.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-logo"></div>
+    </div>
+
+    <!-- Mouse Trail Elements -->
+    <div class="cursor-trail" id="cursorTrail"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Portal <span>CRM</span></h2>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Home</a></li>
+                <li><a href="online-leads.html" class="nav-link">Add Lead</a></li>
+                <li><a href="leads-display.html" class="nav-link">View Leads</a></li>
+                <li><a href="attendance.html" class="nav-link active">Attendance</a></li>
+                <li><a href="client-info.html" class="nav-link">Clients</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Attendance Section -->
+    <section class="attendance-section">
+        <div class="morphing-blob blob-1"></div>
+        <div class="morphing-blob blob-2"></div>
+        <div class="aurora-bg"></div>
+
+        <div class="container">
+            <div class="attendance-header">
+                <div class="header-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h1 class="neon-text">Staff Monthly Attendance</h1>
+                <p>Mark and track attendance for each day of the month</p>
+                <div class="month-selector">
+                    <i class="fas fa-calendar-alt"></i>
+                    <select id="monthSelect" onchange="changeMonth()">
+                        <option value="0">January</option>
+                        <option value="1">February</option>
+                        <option value="2">March</option>
+                        <option value="3">April</option>
+                        <option value="4">May</option>
+                        <option value="5">June</option>
+                        <option value="6">July</option>
+                        <option value="7">August</option>
+                        <option value="8">September</option>
+                        <option value="9">October</option>
+                        <option value="10">November</option>
+                        <option value="11">December</option>
+                    </select>
+                    <select id="yearSelect" onchange="changeMonth()">
+                    </select>
+                    <button class="btn-primary" onclick="loadExistingMonthlyRecord()">
+                        <i class="fas fa-sync-alt"></i> Load Month
+                    </button>
+                </div>
+            </div>
+
+            <!-- Attendance Form -->
+            <div class="attendance-form-container">
+                <h3><i class="fas fa-table"></i> Monthly Attendance Grid</h3>
+                <div class="table-responsive">
+                    <table class="attendance-grid" id="attendanceGrid">
+                        <thead>
+                            <tr>
+                                <th rowspan="2" class="staff-name-col">Staff Name</th>
+                                <th colspan="31" class="days-header">Days of the Month</th>
+                                <th rowspan="2" class="stats-col">Present</th>
+                                <th rowspan="2" class="stats-col">Absent</th>
+                                <th rowspan="2" class="stats-col">Percentage</th>
+                            </tr>
+                            <tr class="day-numbers">
+                                <!-- Days 1-31 will be inserted here by JavaScript -->
+                            </tr>
+                        </thead>
+                        <tbody id="staffAttendanceBody">
+                            <!-- Staff rows will be inserted here by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary magnetic-btn" onclick="markAllPresentForMonth()">
+                        <i class="fas fa-check-double"></i> Mark All Present (All Days)
+                    </button>
+                    <button type="button" class="btn-secondary magnetic-btn" onclick="clearAllAttendance()">
+                        <i class="fas fa-eraser"></i> Clear All
+                    </button>
+                    <button type="button" class="btn-primary magnetic-btn btn-3d" onclick="saveMonthlyAttendance()">
+                        <i class="fas fa-save"></i> Save Monthly Attendance
+                    </button>
+                </div>
+            </div>
+
+            <!-- Monthly Summary -->
+            <div class="attendance-summary">
+                <h3><i class="fas fa-chart-bar"></i> Overall Monthly Summary</h3>
+                <div class="summary-cards">
+                    <div class="summary-card total-days">
+                        <i class="fas fa-calendar-day"></i>
+                        <span class="count" id="totalDaysCount">0</span>
+                        <span class="label">Days in Month</span>
+                    </div>
+                    <div class="summary-card total-staff">
+                        <i class="fas fa-users"></i>
+                        <span class="count" id="totalStaffCount">0</span>
+                        <span class="label">Total Staff</span>
+                    </div>
+                    <div class="summary-card overall-present">
+                        <i class="fas fa-user-check"></i>
+                        <span class="count" id="overallPresent">0%</span>
+                        <span class="label">Overall Present %</span>
+                    </div>
+                    <div class="summary-card overall-absent">
+                        <i class="fas fa-user-times"></i>
+                        <span class="count" id="overallAbsent">0%</span>
+                        <span class="label">Overall Absent %</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Monthly Attendance Records -->
+            <div class="recent-records">
+                <h3><i class="fas fa-history"></i> Monthly Attendance Records</h3>
+                <div class="records-container" id="recordsContainer">
+                    <!-- Records will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+    <script src="attendance.js"></script>
+</body>
+</html>
