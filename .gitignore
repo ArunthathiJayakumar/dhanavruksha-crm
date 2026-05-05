@@ -44,16 +44,14 @@ pids
 # Coverage directory used by tools like istanbul
 coverage/
 
-# Backend files (frontend only)
+# Backend files (exclude only actual backend folder, not frontend files)
 backend/
 api/
-*.py
-*.js
 simple-server.js
 package.json
 package-lock.json
 
-# Documentation files (optional)
+# Documentation files (keep main README)
 *.md
 !README.md
 
