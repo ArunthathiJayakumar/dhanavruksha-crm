@@ -1,7 +1,7 @@
 // API Configuration for Vercel Serverless Backend
 const API_CONFIG = {
-    // Base URL for API calls (Vercel backend)
-    BASE_URL: 'https://dhanavruksha-crm-api.vercel.app/api',
+    // Base URL for API calls (Working Backend)
+    BASE_URL: 'https://arunthathi-crm-api.vercel.app/api',
     
     // Fallback to localhost for development
     FALLBACK_URL: 'http://localhost:3000/api',
