@@ -49,8 +49,9 @@ coverage/
 simple-server.js
 
 # Documentation files (keep main README)
-*.md
+# *.md
 !README.md
+!README-backend.md
 
 # Test files
 test-*.html

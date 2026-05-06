@@ -1,9 +1,10 @@
 // API Configuration for Vercel Serverless Backend
 const API_CONFIG = {
-    // Base URL for API calls
-    BASE_URL: process.env.NODE_ENV === 'production' 
-        ? 'https://dhanavruksha-crm.vercel.app/api' 
-        : 'http://localhost:3000/api',
+    // Base URL for API calls (Vercel backend)
+    BASE_URL: 'https://dhanavruksha-crm-api.vercel.app/api',
+    
+    // Fallback to localhost for development
+    FALLBACK_URL: 'http://localhost:3000/api',
     
     // API Endpoints
     ENDPOINTS: {
@@ -22,10 +23,11 @@ const API_CONFIG = {
     
     // Get full URL for endpoint
     getUrl: function(endpoint) {
-        return this.BASE_URL + this.ENDPOINTS[endpoint];
+        const baseUrl = this.BASE_URL || this.FALLBACK_URL;
+        return baseUrl + this.ENDPOINTS[endpoint];
     },
     
-    // Make API request
+    // Make API request with fallback
     request: async function(endpoint, options = {}) {
         const url = this.getUrl(endpoint);
         const config = {
@@ -41,8 +43,17 @@ const API_CONFIG = {
             return await response.json();
         } catch (error) {
             console.error('API request failed:', error);
-            throw error;
+            // Fallback to LocalStorage if API fails
+            console.log('Falling back to LocalStorage');
+            return this.getFromLocalStorage(endpoint);
         }
+    },
+    
+    // Fallback to LocalStorage
+    getFromLocalStorage: function(endpoint) {
+        const storageKey = endpoint.toLowerCase();
+        const data = localStorage.getItem(storageKey);
+        return data ? JSON.parse(data) : [];
     }
 };
 
