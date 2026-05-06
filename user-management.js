@@ -18,7 +18,7 @@ const defaultUsers = [
 ];
 
 // Initialize
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Get current user session
     currentUser = JSON.parse(localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser') || 'null');
     
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
     
-    loadUsers();
+    await loadUsers();
     displayUsers();
     updateUserStats();
 });
@@ -133,39 +133,37 @@ function saveUsers() {
     console.log('=== SAVE COMPLETE ===');
 }
 
-// Load users from localStorage
-function loadUsers() {
-    const stored = localStorage.getItem('crmUsers');
-    console.log('=== LOADING USERS ===');
-    console.log('Stored data:', stored);
+// Load users from backend API
+async function loadUsers() {
+    console.log('=== LOADING USERS FROM BACKEND ===');
     
-    if (stored) {
-        try {
-            users = JSON.parse(stored);
-            console.log('✅ Loaded users:', users);
-            console.log('✅ Total users loaded:', users.length);
-            
-            // Verify users array is valid
-            if (!Array.isArray(users)) {
-                console.error('❌ Users data is not an array, resetting...');
-                users = [...defaultUsers];
-                saveUsers();
-            } else if (users.length === 0) {
-                console.warn('⚠️ Users array is empty, initializing with default admin...');
-                users = [...defaultUsers];
-                saveUsers();
-            }
-        } catch (error) {
-            console.error('❌ Error parsing users data:', error);
+    try {
+        users = await API_CONFIG.request('USERS');
+        console.log('✅ Loaded users from backend:', users);
+        console.log('✅ Total users loaded:', users.length);
+        
+        // Verify users array is valid
+        if (!Array.isArray(users)) {
+            console.error('❌ Users data is not an array, using fallback...');
             users = [...defaultUsers];
-            saveUsers();
+        } else if (users.length === 0) {
+            console.warn('⚠️ Users array is empty, initializing with default admin...');
+            users = [...defaultUsers];
         }
-    } else {
-        console.log('⚠️ No stored users found, initializing with default admin...');
-        // Initialize with default admin user
-        users = [...defaultUsers];
-        saveUsers();
-        console.log('✅ Initialized with default users:', users);
+    } catch (error) {
+        console.error('❌ Error loading users from backend:', error);
+        console.log('Falling back to LocalStorage...');
+        const stored = localStorage.getItem('crmUsers');
+        if (stored) {
+            try {
+                users = JSON.parse(stored);
+            } catch (parseError) {
+                console.error('❌ Error parsing LocalStorage:', parseError);
+                users = [...defaultUsers];
+            }
+        } else {
+            users = [...defaultUsers];
+        }
     }
     
     console.log('✅ Final users array:', users);
