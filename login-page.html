@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DHANAVRUKSHA CRM - Login</title>
     <link rel="icon" href="./WhatsApp Image 2026-02-25 at 14.27.06.jpeg">
-    <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Login Page Specific Styles */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
         .login-section {
             min-height: 100vh;
             display: flex;
@@ -20,19 +24,44 @@
             overflow: hidden;
         }
 
-        /* Animated Background Elements */
         .login-section::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
             background: 
                 radial-gradient(circle at 20% 20%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1) 0%, transparent 50%);
             animation: quantumFloat 20s ease-in-out infinite;
+        }
+
+        @keyframes quantumFloat {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .particles {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px; height: 4px;
+            background: rgba(212, 175, 55, 0.6);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
         }
 
         .login-container {
@@ -49,7 +78,6 @@
             border: 2px solid rgba(212, 175, 55, 0.3);
             position: relative;
             z-index: 10;
-            transform: translateY(0);
             transition: all 0.3s ease;
         }
 
@@ -67,24 +95,18 @@
         }
 
         .login-header .logo {
-            width: 80px;
-            height: 80px;
+            width: 80px; height: 80px;
             background: linear-gradient(45deg, #d4af37, #f4e4c1);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto 1.5rem;
-            box-shadow: 
-                0 10px 30px rgba(212, 175, 55, 0.3),
-                inset 0 2px 0 rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
             animation: quantumFloat 6s ease-in-out infinite;
         }
 
-        .login-header .logo i {
-            font-size: 2.5rem;
-            color: #0f172a;
-        }
+        .login-header .logo i { font-size: 2.5rem; color: #0f172a; }
 
         .login-header h1 {
             font-size: 2rem;
@@ -96,14 +118,9 @@
             margin-bottom: 0.5rem;
         }
 
-        .login-header p {
-            color: #64748b;
-            font-size: 1rem;
-        }
+        .login-header p { color: #64748b; font-size: 1rem; }
 
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
+        .form-group { margin-bottom: 1.5rem; }
 
         .form-group label {
             display: block;
@@ -113,10 +130,7 @@
             font-size: 0.9rem;
         }
 
-        .form-group label i {
-            margin-right: 0.5rem;
-            color: #d4af37;
-        }
+        .form-group label i { margin-right: 0.5rem; color: #d4af37; }
 
         .form-control {
             width: 100%;
@@ -126,15 +140,12 @@
             font-size: 1rem;
             transition: all 0.3s ease;
             background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
         }
 
         .form-control:focus {
             outline: none;
             border-color: #d4af37;
-            box-shadow: 
-                0 0 0 3px rgba(212, 175, 55, 0.1),
-                0 0 20px rgba(212, 175, 55, 0.1);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
             background: rgba(255, 255, 255, 0.95);
         }
 
@@ -172,30 +183,11 @@
             align-items: center;
             justify-content: center;
             gap: 0.75rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-login::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .btn-login:hover::before {
-            left: 100%;
         }
 
         .btn-login:hover {
             transform: translateY(-2px);
-            box-shadow: 
-                0 10px 30px rgba(212, 175, 55, 0.4),
-                0 0 40px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.4);
         }
 
         .btn-login:disabled {
@@ -204,80 +196,34 @@
             transform: none;
         }
 
-        /* Responsive Design */
+        .error-msg {
+            background: #fee2e2;
+            color: #dc2626;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-msg.show { display: flex; }
+
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
         @media (max-width: 768px) {
-            .login-section {
-                padding: 1rem;
-            }
-
-            .login-container {
-                padding: 2rem;
-                margin: 1rem;
-            }
-
-            .login-header h1 {
-                font-size: 1.75rem;
-            }
-        }
-
-        /* Loading Spinner */
-        .spinner {
-            display: inline-block;
-            width: 1rem;
-            height: 1rem;
-            border: 2px solid rgba(15, 23, 42, 0.1);
-            border-top: 2px solid #0f172a;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        /* Floating Particles */
-        .particles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(212, 175, 55, 0.6);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 1;
-            }
-            90% {
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh) rotate(360deg);
-                opacity: 0;
-            }
+            .login-section { padding: 1rem; }
+            .login-container { padding: 2rem; margin: 1rem; }
+            .login-header h1 { font-size: 1.75rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Login Section -->
     <section class="login-section">
-        <!-- Floating Particles -->
         <div class="particles" id="particles"></div>
 
         <div class="login-container">
@@ -287,6 +233,11 @@
                 </div>
                 <h1>DHANAVRUKSHA CRM</h1>
                 <p>Sign in to your account</p>
+            </div>
+
+            <div class="error-msg" id="errorMsg">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText"></span>
             </div>
 
             <form id="loginForm" onsubmit="handleLogin(event)">
@@ -302,17 +253,6 @@
                         required
                         autocomplete="email"
                     />
-                </div>
-
-                <div class="form-group">
-                    <label for="loginRole">
-                        <i class="fas fa-user-tag"></i> Login As
-                    </label>
-                    <select id="loginRole" class="form-control" required>
-                        <option value="">Select your role</option>
-                        <option value="admin">Admin</option>
-                        <option value="user">User</option>
-                    </select>
                 </div>
 
                 <div class="form-group">
@@ -342,266 +282,137 @@
         </div>
     </section>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+    <!-- Supabase SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <script>
-        // Generate floating particles
+        // ==========================================
+        // SUPABASE CONFIG
+        // ==========================================
+        const SUPABASE_URL = 'https://lyyzmcxotrivtatgwhnh.supabase.co';
+        const SUPABASE_KEY = 'sb_publishable_8sK_jCXGT7cVR5qCKnyuSQ_rZPeLYjy';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        // ==========================================
+        // FLOATING PARTICLES
+        // ==========================================
         function createParticles() {
-            const particlesContainer = document.getElementById('particles');
-            const particleCount = 50;
-            
-            for (let i = 0; i < particleCount; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
-                particlesContainer.appendChild(particle);
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const p = document.createElement('div');
+                p.className = 'particle';
+                p.style.left = Math.random() * 100 + '%';
+                p.style.animationDelay = Math.random() * 15 + 's';
+                p.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(p);
             }
         }
 
-        // Override handleLogin to work with standalone login page
-        function handleLogin(event) {
+        // ==========================================
+        // SHOW ERROR
+        // ==========================================
+        function showError(message) {
+            const box = document.getElementById('errorMsg');
+            document.getElementById('errorText').textContent = message;
+            box.classList.add('show');
+        }
+
+        function hideError() {
+            document.getElementById('errorMsg').classList.remove('show');
+        }
+
+        // ==========================================
+        // LOGIN HANDLER - SUPABASE
+        // ==========================================
+        async function handleLogin(event) {
             event.preventDefault();
-            
-            const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+            hideError();
+
+            const email    = document.getElementById('loginEmail').value.trim().toLowerCase();
             const password = document.getElementById('loginPassword').value;
-            const role = document.getElementById('loginRole').value;
-            const rememberMe = document.getElementById('rememberMe').checked;
+            const remember = document.getElementById('rememberMe').checked;
             const loginBtn = document.getElementById('loginBtn');
-            
-            console.log('=== LOGIN ATTEMPT ===');
-            console.log('Email (normalized):', email);
-            console.log('Password:', password);
-            console.log('Role:', role);
-            
-            // Show loading state
-            const originalBtnText = loginBtn.innerHTML;
+
+            // Show loading
             loginBtn.disabled = true;
             loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
-            
+
             try {
-                // Get users from localStorage
-                let stored = localStorage.getItem('crmUsers');
-                console.log('📦 Stored users data:', stored);
-                
-                // If no users found, try to get from sessionStorage or create default
-                if (!stored) {
-                    console.log('❌ No users in localStorage, checking sessionStorage...');
-                    stored = sessionStorage.getItem('crmUsers');
-                    console.log('📦 SessionStorage data:', stored);
-                    
-                    if (stored) {
-                        // Move from sessionStorage to localStorage
-                        localStorage.setItem('crmUsers', stored);
-                        console.log('✅ Moved users from sessionStorage to localStorage');
-                    } else {
-                        console.log('❌ No users found anywhere, creating default admin...');
-                        // Create default admin user
-                        const defaultUsers = [{
-                            id: 'USR-001',
-                            name: 'Admin User',
-                            email: 'admin@dhanavruksha.com',
-                            role: 'admin',
-                            status: 'active',
-                            password: 'admin123',
-                            createdDate: new Date().toISOString(),
-                            lastLogin: new Date().toISOString()
-                        }];
-                        localStorage.setItem('crmUsers', JSON.stringify(defaultUsers));
-                        stored = JSON.stringify(defaultUsers);
-                        console.log('✅ Default admin created');
-                    }
+                // Step 1: Sign in with Supabase Auth
+                const { data: authData, error: authError } = await supabase.auth.signInWithPassword({
+                    email,
+                    password
+                });
+
+                if (authError) {
+                    throw new Error('Invalid email or password. Please try again.');
                 }
-                
-                if (!stored) {
-                    console.log('❌ Still no users found!');
-                    console.log('Checking all localStorage keys:', Object.keys(localStorage));
-                    throw new Error('No users found. Please contact administrator.');
+
+                // Step 2: Get user profile (role)
+                const { data: profile, error: profileError } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', authData.user.id)
+                    .single();
+
+                if (profileError || !profile) {
+                    throw new Error('Account not set up properly. Please contact admin.');
                 }
-                
-                const users = JSON.parse(stored);
-                console.log('👥 Total users found:', users.length);
-                console.log('📋 User list:', users.map(u => ({email: u.email, role: u.role, status: u.status})));
-                
-                // Normalize emails for comparison (case-insensitive)
-                const normalizedUsers = users.map(u => ({
-                    ...u,
-                    email: u.email.toLowerCase().trim()
-                }));
-                
-                console.log('📋 Normalized user emails:', normalizedUsers.map(u => u.email));
-                console.log('🔍 Looking for email:', email);
-                
-                // Find user by normalized email
-                const user = normalizedUsers.find(u => u.email === email);
-                
-                if (!user) {
-                    console.log('❌ No user found with email:', email);
-                    console.log('Available emails:', normalizedUsers.map(u => u.email));
-                    console.log('Raw comparison test:');
-                    normalizedUsers.forEach(u => {
-                        console.log(`  ${u.email} === ${email} ?`, u.email === email);
-                    });
-                    throw new Error(`Email not found: ${email}. Available emails: ${normalizedUsers.map(u => u.email).join(', ')}`);
-                }
-                
-                console.log('✅ User found:', user.name, '| Role:', user.role, '| Status:', user.status);
-                
-                // Check password
-                if (user.password !== password) {
-                    console.log('❌ Password mismatch');
-                    throw new Error('Incorrect password. Please try again.');
-                }
-                
-                console.log('✅ Password verified');
-                
-                // Check role
-                if (user.role !== role) {
-                    console.log('❌ Role mismatch - User has:', user.role, 'Selected:', role);
-                    throw new Error(`Wrong role selected. Your account role is: ${user.role}`);
-                }
-                
-                console.log('✅ Role verified');
-                
-                // Check status
-                if (user.status === 'inactive' || user.status === 'suspended') {
-                    console.log('❌ Account not active:', user.status);
-                    throw new Error(`Your account is ${user.status}. Please contact admin.`);
-                }
-                
-                console.log('✅ Account status: active');
-                
-                // Create user session
+
+                // Step 3: Save session info
                 const userData = {
-                    id: user.id,
-                    email: user.email,
-                    first_name: user.name.split(' ')[0],
-                    last_name: user.name.split(' ').slice(1).join(' ') || '',
-                    role: user.role
+                    id: profile.id,
+                    email: profile.email,
+                    name: profile.full_name,
+                    role: profile.role
                 };
-                
-                console.log('🔐 Creating session:', userData);
-                
-                // Store session
-                if (rememberMe) {
+
+                if (remember) {
                     localStorage.setItem('currentUser', JSON.stringify(userData));
                 } else {
                     sessionStorage.setItem('currentUser', JSON.stringify(userData));
                 }
-                
-                // Update last login
-                user.lastLogin = new Date().toISOString();
-                localStorage.setItem('crmUsers', JSON.stringify(normalizedUsers));
-                
-                console.log('✅ Session created and last login updated');
-                
-                // Show success
-                showNotification(`Welcome back, ${user.name}! Login successful.`, 'success');
-                
-                // Redirect after 1 second
-                setTimeout(() => {
-                    console.log('🚀 Redirecting to:', role === 'admin' ? 'user-management.html' : 'tasks.html');
-                    if (role === 'admin') {
-                        window.location.href = 'user-management.html';
-                    } else {
-                        window.location.href = 'tasks.html';
-                    }
-                }, 1000);
-                
+
+                // Step 4: Redirect based on role
+                if (profile.role === 'admin') {
+                    window.location.href = 'user-management.html';
+                } else {
+                    window.location.href = 'tasks.html';
+                }
+
             } catch (error) {
-                console.error('❌ Login error:', error);
-                showNotification(error.message, 'error');
-                
-                // Reset button
+                showError(error.message);
                 loginBtn.disabled = false;
-                loginBtn.innerHTML = originalBtnText;
+                loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> <span>Login</span>';
             }
         }
 
-        // Show notification function
-        function showNotification(message, type = 'info') {
-            // Create notification element
-            const notification = document.createElement('div');
-            notification.className = `notification notification-${type}`;
-            notification.innerHTML = `
-                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
-                <span>${message}</span>
-            `;
-            
-            // Add styles
-            Object.assign(notification.style, {
-                position: 'fixed',
-                top: '20px',
-                right: '20px',
-                background: type === 'success' ? '#28a745' : '#17a2b8',
-                color: 'white',
-                padding: '1rem 1.5rem',
-                borderRadius: '8px',
-                boxShadow: '0 4px 6px rgba(0,0,0,0.1)',
-                zIndex: '10000',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '0.75rem',
-                fontWeight: '600',
-                animation: 'slideInRight 0.3s ease',
-                maxWidth: '400px'
-            });
-            
-            document.body.appendChild(notification);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                notification.style.animation = 'slideOutRight 0.3s ease';
-                setTimeout(() => notification.remove(), 300);
-            }, 3000);
+        // ==========================================
+        // CHECK IF ALREADY LOGGED IN
+        // ==========================================
+        async function checkSession() {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (session) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('role')
+                    .eq('id', session.user.id)
+                    .single();
+
+                if (profile) {
+                    window.location.href = profile.role === 'admin' 
+                        ? 'user-management.html' 
+                        : 'tasks.html';
+                }
+            }
         }
 
-        // Add animation styles
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOutRight {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-        `;
-        document.head.appendChild(style);
-
-        // Initialize particles on page load
+        // ==========================================
+        // INIT
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();
-            
-            // Check if user is already logged in
-            const currentUser = localStorage.getItem('currentUser') || sessionStorage.getItem('currentUser');
-            if (currentUser) {
-                const user = JSON.parse(currentUser);
-                console.log('User already logged in:', user);
-                // Redirect to appropriate page
-                setTimeout(() => {
-                    if (user.role === 'admin') {
-                        window.location.href = 'user-management.html';
-                    } else {
-                        window.location.href = 'tasks.html';
-                    }
-                }, 1000);
-            }
+            checkSession();
         });
     </script>
 </body>
